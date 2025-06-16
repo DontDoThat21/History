@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Browser History</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1 class="title">
+          <span class="icon">🕒</span>
+          Custom Browser History
+        </h1>
+        <p class="subtitle">Privacy-focused local history management</p>
+      </div>
+      
+      <div class="header-actions">
+        <button class="btn btn-secondary" id="importBtn">Import</button>
+        <button class="btn btn-secondary" id="exportBtn">Export</button>
+        <button class="btn btn-danger" id="clearBtn">Clear All</button>
+      </div>
+    </header>
+
+    <!-- Search and Filters -->
+    <div class="search-section">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search history by title or URL..." />
+        <button class="search-btn" id="searchBtn">
+          <span class="search-icon">🔍</span>
+        </button>
+      </div>
+      
+      <div class="filters">
+        <select id="timeFilter" class="filter-select">
+          <option value="all">All Time</option>
+          <option value="today">Today</option>
+          <option value="yesterday">Yesterday</option>
+          <option value="week">This Week</option>
+          <option value="month">This Month</option>
+          <option value="year">This Year</option>
+        </select>
+        
+        <select id="sortFilter" class="filter-select">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="visits">Most Visited</option>
+          <option value="alphabetical">Alphabetical</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="stats-section" id="statsSection">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="totalEntries">0</div>
+          <div class="stat-label">Total Entries</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="totalVisits">0</div>
+          <div class="stat-label">Total Visits</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="avgVisits">0</div>
+          <div class="stat-label">Avg Visits/Entry</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="dateRange">-</div>
+          <div class="stat-label">Date Range</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- History List -->
+    <div class="history-section">
+      <div class="history-header">
+        <h2>History Entries</h2>
+        <div class="history-count">
+          <span id="displayedCount">0</span> entries
+        </div>
+      </div>
+      
+      <div class="history-list" id="historyList">
+        <div class="loading" id="loadingSpinner">
+          <div class="spinner"></div>
+          <p>Loading history...</p>
+        </div>
+      </div>
+      
+      <div class="pagination" id="pagination" style="display: none;">
+        <button class="btn btn-secondary" id="prevBtn">Previous</button>
+        <span class="page-info">
+          Page <span id="currentPage">1</span> of <span id="totalPages">1</span>
+        </span>
+        <button class="btn btn-secondary" id="nextBtn">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Import -->
+  <div class="modal" id="importModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Import History</h3>
+        <button class="close-btn" id="closeImportModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Select a JSON file to import history entries:</p>
+        <input type="file" id="importFile" accept=".json" />
+        <div class="import-info">
+          <p><strong>Note:</strong> This will add entries to your existing history. Duplicate entries will be updated.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelImport">Cancel</button>
+        <button class="btn btn-primary" id="confirmImport">Import</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Confirmation -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="confirmTitle">Confirm Action</h3>
+        <button class="close-btn" id="closeConfirmModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage">Are you sure you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelConfirm">Cancel</button>
+        <button class="btn btn-danger" id="confirmAction">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
