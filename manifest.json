@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Custom Browser History",
+  "version": "1.0.0",
+  "description": "A privacy-focused browser history replacement that stores data locally",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "history"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_title": "Custom History"
+  },
+  "commands": {
+    "open-history": {
+      "suggested_key": {
+        "default": "Ctrl+H"
+      },
+      "description": "Open custom history page"
+    }
+  }
+}

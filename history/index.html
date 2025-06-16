@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Browser History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>
+                <span class="icon">🕐</span>
+                Custom Browser History
+            </h1>
+            <div class="header-actions">
+                <button id="stats-btn" class="btn btn-secondary">Statistics</button>
+                <button id="export-btn" class="btn btn-secondary">Export</button>
+                <button id="import-btn" class="btn btn-secondary">Import</button>
+                <button id="clear-btn" class="btn btn-danger">Clear All</button>
+            </div>
+        </header>
+
+        <div class="search-section">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search history..." class="search-input">
+                <button id="search-btn" class="btn btn-primary">Search</button>
+            </div>
+            <div class="filters">
+                <select id="sort-select" class="filter-select">
+                    <option value="timestamp-desc">Newest First</option>
+                    <option value="timestamp-asc">Oldest First</option>
+                    <option value="title-asc">Title A-Z</option>
+                    <option value="title-desc">Title Z-A</option>
+                </select>
+                <input type="number" id="limit-input" placeholder="Limit (default: 100)" min="1" max="1000" class="filter-input">
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading history...</p>
+            </div>
+
+            <div id="no-results" class="no-results" style="display: none;">
+                <p>No history entries found.</p>
+            </div>
+
+            <div id="history-list" class="history-list"></div>
+        </div>
+
+        <div class="pagination">
+            <button id="prev-btn" class="btn btn-secondary" disabled>Previous</button>
+            <span id="page-info" class="page-info">Page 1</span>
+            <button id="next-btn" class="btn btn-secondary">Next</button>
+        </div>
+    </div>
+
+    <!-- Modal for statistics -->
+    <div id="stats-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>History Statistics</h2>
+                <button id="close-stats" class="close">&times;</button>
+            </div>
+            <div id="stats-content" class="modal-body">
+                <div class="stat-item">
+                    <h3>Total Entries</h3>
+                    <p id="total-entries">-</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Top Domains</h3>
+                    <div id="top-domains"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for import -->
+    <div id="import-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Import History</h2>
+                <button id="close-import" class="close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Paste your exported history JSON data below:</p>
+                <textarea id="import-data" placeholder="Paste JSON data here..." rows="10"></textarea>
+                <div class="modal-actions">
+                    <button id="import-confirm" class="btn btn-primary">Import</button>
+                    <button id="import-cancel" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="file-input" accept=".json" style="display: none;">
+
+    <script src="../database/db.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

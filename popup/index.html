@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="popup-container">
+        <header class="popup-header">
+            <h1>
+                <span class="icon">🕐</span>
+                Custom History
+            </h1>
+        </header>
+
+        <div class="popup-content">
+            <div class="stats-summary">
+                <div class="stat-item">
+                    <span class="stat-label">Total Entries</span>
+                    <span id="total-entries" class="stat-value">-</span>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <button id="open-history" class="btn btn-primary">
+                    📖 Open History
+                </button>
+                <button id="export-data" class="btn btn-secondary">
+                    📤 Export
+                </button>
+                <button id="clear-data" class="btn btn-danger">
+                    🗑️ Clear All
+                </button>
+            </div>
+
+            <div class="recent-history">
+                <h3>Recent Visits</h3>
+                <div id="recent-list" class="recent-list">
+                    <div class="loading-small">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="popup-footer">
+            <p>Press <kbd>Ctrl+H</kbd> to open history</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
