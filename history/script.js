@@ -101,7 +101,7 @@ class HistoryPage {
       const options = {
         search: this.currentSearch,
         limit: this.currentLimit,
-        offset: (this.currentPage - 1) * this.itemsPerPage,
+        offset: (this.currentPage - 1) * this.currentLimit,
         sortBy,
         sortOrder
       };
