@@ -129,19 +129,8 @@ function cleanupHistoryEntries(database, cutoffTime) {
   });
 }
 
-// Listen for keyboard events
-document.addEventListener('keydown', (event) => {
-  // Check for Ctrl+H
-  if (event.ctrlKey && event.key === 'h') {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    // Send message to background script to open custom history
-    chrome.runtime.sendMessage({
-      action: 'openHistory'
-    });
-  }
-});
+// Keyboard shortcuts are handled by Chrome commands API in manifest.json and background.js
+// Content script keyboard handling removed to avoid conflicts with Chrome commands API
 
 // Listen for messages from background script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
