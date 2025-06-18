@@ -131,8 +131,8 @@ function cleanupHistoryEntries(database, cutoffTime) {
 
 // Listen for keyboard events
 document.addEventListener('keydown', (event) => {
-  // Check for Ctrl+H (or Cmd+H on Mac)
-  if ((event.ctrlKey || event.metaKey) && event.key === 'h') {
+  // Check for Ctrl+H
+  if (event.ctrlKey && event.key === 'h') {
     event.preventDefault();
     event.stopPropagation();
     

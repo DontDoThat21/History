@@ -31,8 +31,7 @@
   "commands": {
     "open-history": {
       "suggested_key": {
-        "default": "Ctrl+H",
-        "mac": "Cmd+H"
+        "default": "Ctrl+H"
       },
       "description": "Open custom history page"
     }

@@ -35,7 +35,7 @@ A privacy-focused browser history replacement system that stores data locally an
 
 ### Opening Custom History
 
-- **Keyboard Shortcut**: Press `Ctrl+H` (or `Cmd+H` on Mac)
+- **Keyboard Shortcut**: Press `Ctrl+H`
 - **Extension Popup**: Click the extension icon and select "Open History"
 - **Direct Access**: Navigate to the history page via extension
 
