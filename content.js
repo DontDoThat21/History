@@ -1,30 +1,29 @@
 // Content script for Custom Browser History extension
 
-// Import database utilities
-import('./database/db.js').then(module => {
-  window.HistoryDB = module.HistoryDB;
-}).catch(() => {
-  // Handle import error - create a basic database interface
-  console.warn('Database module not loaded, using fallback');
-});
-
 // Initialize database connection
 let db = null;
 
 // Initialize the database when content script loads
-(async function initializeDatabase() {
+async function initializeDatabase() {
   try {
-    if (window.HistoryDB) {
+    // Try to import database utilities
+    try {
+      const module = await import('./database/db.js');
+      window.HistoryDB = module.HistoryDB;
       db = new window.HistoryDB();
       await db.init();
-    } else {
-      // Fallback database initialization
+    } catch (importError) {
+      // Handle import error - create a basic database interface
+      console.warn('Database module not loaded, using fallback:', importError);
       db = await initFallbackDB();
     }
   } catch (error) {
     console.error('Failed to initialize database:', error);
   }
-})();
+}
+
+// Initialize database when content script loads
+initializeDatabase();
 
 // Fallback database implementation
 async function initFallbackDB() {
