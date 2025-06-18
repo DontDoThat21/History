@@ -40,7 +40,7 @@
   
   "web_accessible_resources": [
     {
-      "resources": ["history/*"],
+      "resources": ["history/*", "database/*"],
       "matches": ["<all_urls>"]
     }
   ]
