@@ -22,6 +22,9 @@ class HistoryManager {
       this.db = new HistoryDB();
       await this.db.init();
       
+      // Load theme preference
+      await this.loadTheme();
+      
       // Set up event listeners
       this.setupEventListeners();
       
@@ -80,6 +83,11 @@ class HistoryManager {
         'Are you sure you want to delete all history entries? This action cannot be undone.',
         () => this.clearAllHistory()
       );
+    });
+
+    // Theme toggle
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      this.toggleTheme();
     });
 
     // Modal event listeners
@@ -549,6 +557,53 @@ class HistoryManager {
       return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
     } else {
       return date.toLocaleString();
+    }
+  }
+
+  // Theme management methods
+  async loadTheme() {
+    try {
+      const savedTheme = await this.db.getSetting('theme');
+      const theme = savedTheme || 'light';
+      this.applyTheme(theme, false);
+    } catch (error) {
+      console.error('Failed to load theme:', error);
+      this.applyTheme('light', false);
+    }
+  }
+
+  async toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    try {
+      await this.db.setSetting('theme', newTheme);
+      this.applyTheme(newTheme, true);
+      this.showToast(`Switched to ${newTheme} theme`, 'info');
+    } catch (error) {
+      console.error('Failed to save theme:', error);
+      this.showToast('Failed to save theme preference', 'error');
+    }
+  }
+
+  applyTheme(theme, animate = true) {
+    const root = document.documentElement;
+    const themeIcon = document.querySelector('.theme-icon');
+    
+    // Apply theme attribute
+    root.setAttribute('data-theme', theme);
+    
+    // Update theme icon
+    if (themeIcon) {
+      themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+    }
+    
+    // Add transition class for smooth animation
+    if (animate) {
+      root.style.transition = 'all 0.3s ease';
+      setTimeout(() => {
+        root.style.transition = '';
+      }, 300);
     }
   }
 
